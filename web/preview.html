@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Layout Preview</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+            @media only screen and (max-width: 600px) {
+  body {
+     overflow-x: visible;
+  }
+}
+ .div1 {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 10px;
+  overflow-x: visible;
+   background-color: #E8E8E8;
+   transition:ease-in-out 300ms;
+}
+.div1:hover{
+    background-color: skyblue!important;
+    opacity: 0.1;
+}
+ .div2 {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline-block;
+border-radius: 10px;
+}
+.center {
+  text-align: center;
+   padding: 50px 0;
+}
+
+.center1 {
+  text-align: center;
+}
+
+body
+{
+    background-color: #fafafa;
+    overflow-x: visible;
+}
+.active
+{
+    background-color: orange!important;
+}
+        </style>
+    </head>
+    <body>
+          <div id="ans" class="center">Hello World</div>
+        <script>
+            var ans="";
+              var seats = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];   
+            console.log(localStorage.getItem("myarray"));
+//            var gfg = localStorage.getItem("myarray");
+            var gfg =  JSON.parse(localStorage.getItem("myarray"));
+             for (var i = 0; i <gfg.length; i++) {
+//       ans = ans+`<span>${seats[i]}</span>`;
+        for (var j = 0; j < gfg[i].length; j++)    {
+            
+//            document.write(gfg[i][j] + " ");
+if(gfg[i][j]===`${seats[i]}0${j}`)
+{
+    
+   ans = ans+`<div class='div2' id='${gfg[i][j]}' onclick="go1('${gfg[i][j]}')"></div>`;
+}
+else
+{
+ans = ans+`<div class='div1' id='${gfg[i][j]}' onclick="go1('${gfg[i][j]}')"></div>`;
+}
+                }
+//        document.write("<br>");
+ans = ans+"<br>";
+    } 
+    document.getElementById("ans").innerHTML = ans;
+            </script>
+    </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <style>
+            .close {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+            @media only screen and (max-width: 600px) {
+  body {
+     overflow-x: visible;
+  }
+}
+ .div1 {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 10px;
+  overflow-x: visible;
+   background-color: #E8E8E8;
+   transition:ease-in-out 300ms;
+}
+.div1:hover{
+    background-color: skyblue!important;
+    opacity: 0.1;
+}
+ .div2 {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline-block;
+border-radius: 10px;
+}
+.center {
+  text-align: center;
+   padding: 50px 0;
+}
+
+.center1 {
+  text-align: center;
+}
+
+body
+{
+    background-color: #fafafa;
+    overflow-x: visible;
+}
+.active
+{
+    background-color: orange!important;
+}
+        </style>
+    </head>
+    <body onload="go()">
+<!--        <form>
+            Name: <input type="text" id="name">
+            Address: <textarea rows="5" cols="10"></textarea>
+        </form>-->
+        <div id="ans" class="center">Hello World</div>
+        <input type="file" onchange="read(this)">
+        <h1 style="text-align: center"><img src="photos/backmovie.PNG" id="pre"></h1>
+        <h3 style="text-align: center">All Eyes are here!</h3>
+        <button id="bt1" onclick="preview()">Preview Layout</button>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+                 function read(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#pre')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    var h = 0;
+    var seats;        
+    var gfg;
+            var noofseats = 4;
+            var row = 8;
+            var col = 20;
+            function go()
+            {
+                
+             seats = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];   
+                var ans="";
+                 // Create one dimensional array
+        gfg = new Array(8);
+//    document.write("Creating 2D array <br>");
+      
+    // Loop to create 2D array using 1D array
+    for (var i = 0; i < gfg.length; i++) {
+        gfg[i] = new Array(20);
+    }
+      
+    
+    // Loop to initialize 2D array elements.
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 20; j++) {
+            gfg[i][j] = `${seats[i]}${h++}`;
+        }
+        h =0;
+    }
+        
+    // Loop to display the elements of 2D array. 
+    for (var i = 0; i <8; i++) {
+//       ans = ans+`<span>${seats[i]}</span>`;
+        for (var j = 0; j < 20; j++)    {
+            
+//            document.write(gfg[i][j] + " ");
+ans = ans+`<div class='div1' id='${gfg[i][j]}' onclick="go1('${gfg[i][j]}')"></div>`;
+
+                }
+//        document.write("<br>");
+ans = ans+"<br>";
+    } 
+    document.getElementById("ans").innerHTML = ans;
+            }
+      function go1(ss)
+      {
+          var ans="";
+          if(document.getElementById(ss).className === 'div1 active')
+          {
+              document.getElementById(ss).className = "div1";
+          }
+          else
+          {
+          document.getElementById(ss).className = "div1 active";
+      }
+          
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 20; j++) {
+        if(ss === `${seats[i]}0${j}`)
+        {
+             gfg[i][j] = `${seats[i]}${j}`;
+        }
+               else if(gfg[i][j]===ss)
+            {
+            gfg[i][j] = `${seats[i]}0${j}`;
+        }
+       
+        }
+    }
+
+    // Loop to display the elements of 2D array. 
+    for (var i = 0; i <8; i++) {
+//       ans = ans+`<span>${seats[i]}</span>`;
+        for (var j = 0; j < 20; j++)    {
+            
+//            document.write(gfg[i][j] + " ");
+if(gfg[i][j]===`${seats[i]}0${j}`)
+{
+    
+   ans = ans+`<div class='div2' id='${gfg[i][j]}' onclick="go1('${gfg[i][j]}')"><img src="data:image/png;base64,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"width='30px'></div>`;
+}
+else
+{
+ans = ans+`<div class='div1' id='${gfg[i][j]}' onclick="go1('${gfg[i][j]}')"></div>`;
+}
+                }
+//        document.write("<br>");
+ans = ans+"<br>";
+    } 
+    document.getElementById("ans").innerHTML = ans;
+}
+          
+      function preview()
+      {
+          var str = JSON.stringify(gfg);
+          localStorage.setItem("myarray",str);
+          console.log(localStorage.getItem("myarray"));
+          window.location.href = "/BookmyMovie/preview.html";
+      }
+            </script>
+    </body>
+</html>
